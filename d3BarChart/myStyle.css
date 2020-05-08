@@ -1,0 +1,26 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    align-items: center;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 0.1fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
+    justify-content: center;
+    height: fit-content
+}
+
+.chartContainer{
+    background-color: aqua;
+    border: 1px solid red;
+    grid-area: 2/2/3/3;
+    height: 100%;
+}
+
+.bar{
+    fill: blue;
+    stroke: black;
+    stroke-width: 0.5px;
+}

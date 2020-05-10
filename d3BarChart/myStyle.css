@@ -1,26 +1,58 @@
 html,body{
     margin: 0;
-    padding: 0;
+    padding: 0; 
 }
 
 body{
-    align-items: center;
-    display: grid;
-    grid-template-columns: 0.1fr 1fr 0.1fr;
-    grid-template-rows: 0.1fr 1fr 0.1fr;
-    justify-content: center;
-    height: fit-content
+    background: red; 
+}
+
+svg{
+    box-shadow: 0 0 30px gray;
+    padding:50px;
 }
 
 .chartContainer{
-    background-color: aqua;
-    border: 1px solid red;
-    grid-area: 2/2/3/3;
-    height: 100%;
+    background: linear-gradient(rgb(66, 29, 153),rgb(223, 223, 224));
 }
 
-.bar{
-    fill: blue;
-    stroke: black;
-    stroke-width: 0.5px;
+.title{ 
+    fill: white;
+    font-size: 30px; 
+    text-shadow: 0 0 3px black;
+} 
+
+.axisLabel{
+    fill: white;  
+    font-size: 20px;
+    text-shadow: 0 0 2px black;
+
+}
+
+.bar{ 
+    transition-duration: .25s;
+} 
+
+.bar:hover{
+    fill: whitesmoke;
+}
+
+.hoverMessage{ 
+    align-items: center;
+    background-color: rgb(244, 243, 250); 
+    border-radius: 15px; 
+    box-shadow: 0 0 5px black;
+    color: black; 
+    display: grid;
+    height: 50px;
+    opacity: 0;  
+    padding: 5px;
+    position: absolute; 
+    justify-content: center; 
+    text-align: center;
+    width: fit-content;
+} 
+
+.hoverMessaji b{
+    display: inline;
 }

@@ -1,7 +1,7 @@
 //This function is to styling the console.log and optimize the debug process
 function debugLog(label,message){
     let Label=label[0].toUpperCase() + label.slice(1)
-    return  typeof(message)=="string" ? console.log(`%c ${Label}: %c${message}`,"color:yellow","color:cyan") : console.log(`%c ${Label}:`,"color:blue",message)
+    return  typeof(message)=="string" ? console.log(`%c ${Label}: %c${message}`,"color:yellow","color:cyan") : console.log(`%c ${Label}:`,"color:white",message)
 }
 
 let url="https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json"
@@ -48,28 +48,49 @@ function handleData(data){
 
     //we create a scale to the values bigger than the svg size
     let padding = 25
+    let leftPadding= 60
+
+        let minValueY=d3.min(chartData,d=>d[1])
+        let maxValueY=d3.max(chartData,d=>d[1])
+        const yScale=d3.scaleLinear().domain([0,maxValueY]).range([height-padding,padding])
+        const yAxis=d3.axisLeft(yScale)
+
+        let minValueX=d3.min(chartData,d=>d[0])
+        let maxValueX=d3.max(chartData,d=>d[0])
     
 
+       const svg=d3.select("#title").append("svg").attr("width",width+25).attr("height",height)
+       let timeScale = d3.scaleTime()
+       .domain([new Date(minValueX), new Date(maxValueX)])
+         .range([0, width-50]);
+         var xAxis=d3.axisBottom(timeScale)
 
+
+    debugLog("scale",timeScale) 
+
+    //we add axes titles and title graf 
+    svg.append("text").attr("x",width/2).attr("y",padding).text("Gross Domestic Product Growing").attr("text-anchor","middle").attr("class","title")
+    svg.append("text").attr("x",width/2).attr("y",height-padding/2).text("Date (Year)").attr("text-anchor","middle").attr("class","axisLabel")
+    svg.append("text").attr("x",(-height/2)+padding).attr("y",15).text("Gross Domestic Product (Billion USD)").attr("text-anchor","middle").attr("transform","rotate(-90)").attr("class","axisLabel")
+
+
+    svg.append("div").attr("id","tooltip")
+    svg.append("g").attr("id","y-axis").attr("transform","translate("+leftPadding+","+(-padding+5)+")").call(yAxis)
+    svg.append('g').attr("id","x-axis").attr("transform","translate("+(leftPadding)+","+(height-padding*2+5)+")").call(xAxis)
+    let bars=svg.selectAll("rect").data(chartData).enter().append("rect").attr("width",(width-50)/size).attr("height",d=>height-yScale(d[1])-padding).attr("x",(d,i)=>leftPadding+i*(width-50)/size).attr("y",d=>yScale(d[1])-padding+5).attr("class","bar").attr("fill",(d,i)=>"rgb(95,25,"+(255-i)+")").attr("data-date",d=>d[0]).attr("data-gdp",d=>d[1])
+    bars.on("mouseover",d=>{
+        let tooltip=document.getElementById("tooltip")
+        tooltip.style.opacity=1
+        tooltip.innerHTML=`Current data <br/>${d[1]} Billion USD <br/> ${d[0]}`;
+        tooltip.setAttribute("data-date",d[0])
+        tooltip.style.left=event.clientX+25
+        tooltip.style.top=event.clientY-75
+        debugLog("x",event.clientX);
+        debugLog("Y",event.clientY)
+    }).on("mouseout",d=>{
+        let tooltip=document.getElementById("tooltip")
+        tooltip.style.opacity=0
+    })
     
-    let minValueY=d3.min(chartData,d=>d[1])
-    let maxValueY=d3.max(chartData,d=>d[1])
-    const yScale=d3.scaleLinear().domain([0,maxValueY]).range([height-padding,padding])
-    const yAxis=d3.axisLeft(yScale)
 
-    let minValueX=d3.min(chartData,d=>parseInt(d[0].slice(0,4)))
-    let maxValueX=d3.max(chartData,d=>parseInt(d[0].slice(0,4)))
-    const xScale=d3.scaleLinear().domain([minValueX,maxValueX]).range([50,width])
-    const xAxis=d3.axisBottom(xScale)
-    debugLog("maxy",height-yScale(maxValueY))
-    debugLog("miny",height-yScale(minValueY))
-    debugLog("lengthbyp2px",size*2)
-
-    //We created a svg into the chart container, this is 100% of 100% of the cureent cmtainer 
-    const svg=d3.select("#title").append("svg").attr("width",width+25).attr("height",height)
-
-    svg.append("g").attr("transform","translate("+(50)+",0)").attr("id","y-axis").call(yAxis)
-    svg.append("g").attr("transform","translate(0,"+(height-padding)+")").attr("id","x-axis").call(xAxis)
-    svg.selectAll("rect").data(chartData).enter().append("rect").attr("width",((width-50)/size)-1).attr("height",d=>height-yScale(d[1])-padding).attr("x",(d,i)=>50+i*(width-50)/size).attr("y",d=>yScale(d[1])).attr("class","bar")
-} 
-
+}

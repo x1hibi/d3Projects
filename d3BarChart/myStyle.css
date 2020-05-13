@@ -4,16 +4,30 @@ html,body{
 }
 
 body{
-    background: red; 
+    align-items: center;
+    background: whitesmoke; 
+    display: grid;
+    grid-template-columns: 1fr 80% 1fr;
+    grid-template-rows: 100vh;
+    justify-items: center;
+}
+
+.author{
+    position: fixed;
+    bottom: 35px;
+    left: 45%;
+}
+
+.chartContainer{
+    background: linear-gradient(rgb(66, 29, 153),rgb(223, 223, 224));
+    grid-area: 1/2/2/3;
+    height: fit-content;
+    width: fit-content;
 }
 
 svg{
     box-shadow: 0 0 30px gray;
     padding:50px;
-}
-
-.chartContainer{
-    background: linear-gradient(rgb(66, 29, 153),rgb(223, 223, 224));
 }
 
 .title{ 
@@ -44,9 +58,8 @@ svg{
     box-shadow: 0 0 5px black;
     color: black; 
     display: grid;
-    height: 50px;
     opacity: 0;  
-    padding: 5px;
+    padding: 0 5px;
     position: absolute; 
     justify-content: center; 
     text-align: center;
@@ -55,4 +68,23 @@ svg{
 
 .hoverMessaji b{
     display: inline;
+}
+
+.author{
+    grid-area: 1/2/2/3;
+    text-shadow: 0 0 5px gainsboro;
+    text-align: center;
+}
+
+@media (max-width:480px){
+    body{
+        display: block;
+    }
+}
+
+
+@media (max-height:480px){
+    body{
+        display: block;
+    }
 }

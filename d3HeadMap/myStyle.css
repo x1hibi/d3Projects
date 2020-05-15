@@ -1,0 +1,97 @@
+html,body{
+    margin: 0;
+    padding: 0; 
+}
+
+body{
+    align-items: center;
+    background: whitesmoke; 
+    display: grid;
+    grid-template-columns: 1fr 80% 1fr;
+    grid-template-rows: 100vh;
+    justify-items: center;
+}
+
+.author{
+    position: fixed;
+    bottom: 35px;
+    left: 45%;
+}
+
+.chartContainer{
+    background: linear-gradient(rgb(66, 29, 153),rgb(223, 223, 224));
+    grid-area: 1/2/2/3;
+    height: fit-content;
+    width: fit-content;
+}
+
+svg{
+    background-color: white;
+    box-shadow: 0 0 30px gray;
+    padding:50px;
+}
+
+.title{ 
+    fill: rgb(102, 63, 63);
+    font-size: 35px; 
+    text-shadow: 0 0 5px lightblue;
+} 
+
+.axisLabel{
+    fill: black;  
+    font-size: 22.5px;
+}
+
+g text{
+    font-size: 17px;
+}
+
+path g{
+    text-anchor: middle;
+}
+
+.cell{ 
+    transition-duration: .25s;
+} 
+
+.cell:hover{
+    fill: whitesmoke;
+}
+
+.hoverMessage{ 
+    align-items: center;
+    background-color: rgba(59, 11, 11, 0.7); 
+    border-radius: 15px; 
+    box-shadow: 0 0 5px black;
+    color: white; 
+    display: grid;
+    opacity: 0;  
+    padding: 0 5px;
+    position: absolute; 
+    justify-content: center; 
+    text-align: center;
+    width: fit-content;
+} 
+
+.hoverMessaji b{
+    display: inline;
+}
+
+.author{
+    grid-area: 1/2/2/3;
+    text-shadow: 0 0 5px gainsboro;
+    text-align: center;
+}
+
+@media (max-width:480px){
+    body{
+        display: block;
+    }
+}
+
+
+@media (max-height:480px){
+    body{
+        display: block;
+    }
+}

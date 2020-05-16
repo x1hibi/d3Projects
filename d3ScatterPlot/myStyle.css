@@ -1,0 +1,73 @@
+html,body{
+    margin: 0; 
+    padding: 0;
+} 
+
+.plotContainer{ 
+    align-items: center;
+    background-color:  lightblue; 
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr ; 
+    padding: 50px; 
+    justify-items: center; 
+
+} 
+
+svg{
+    background: white; 
+    box-shadow: 0 0 20px grey;
+} 
+
+
+.title{ 
+    fill: black;
+    font-size: 42.5px; 
+    height: fit-content;
+} 
+
+.legend{
+    stroke: red; 
+    stroke-width: 1px;
+    fill: gray;
+}
+
+.axisLabel{
+    fill: black;  
+    font-size: 25px;
+}
+
+.hoverMessage{ 
+    align-items: center;
+    background-color: rgb(220, 218, 228);  
+    border: 5px inset rgb(45, 36, 102);
+    border-radius: 15px 0 15px 0; 
+    box-shadow: 0 0 5px rgb(61, 97, 109);
+    color: rgb(44, 9, 44); 
+    display: grid;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: small; 
+    height: auto;
+    opacity: 0;  
+    padding: 5px;
+    position: absolute; 
+    justify-content: center; 
+    text-align: center;
+    width: 150px;
+}   
+
+span{
+    font-weight: 600;
+}
+
+@media (max-width:480px){
+    .plotContainer{ 
+        width: 800px;
+    } 
+}
+
+@media (max-height:480px){
+    .plotContainer{ 
+        width: 800px;
+    } 
+}
